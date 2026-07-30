@@ -1,13 +1,13 @@
 variable "backup_project_id" {
   type        = string
   description = "The project ID containing GCBDR vaults and plans"
-  default     = "argo-svc-dev-4"
+  default     = "backup-project"
 }
 
 variable "lab_project_id" {
   type        = string
   description = "The project ID containing the virtual machines"
-  default     = "argo-svc-dev-3"
+  default     = "workload-project"
 }
 
 variable "backup_vault_region" {

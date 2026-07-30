@@ -29,7 +29,7 @@ def main():
         apply_end = float(sys.argv[2]) if len(sys.argv) > 2 else datetime.now().timestamp()
         total_apply_duration = int(apply_end - apply_start)
         
-        lab_project = "argo-svc-dev-3"
+        lab_project = "workload-project"
         clone_db_name = "dev-argo-demo-mssql-1"
         tfstate_path = os.path.join(os.path.dirname(__file__), "..", "terraform.tfstate")
         if os.path.exists(tfstate_path):

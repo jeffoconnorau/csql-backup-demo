@@ -2,8 +2,8 @@
 # Script to rebuild the lost argo-svc-dev terraform.tfstate file
 set -e
 
-LAB_PROJECT="argo-svc-dev-3"
-BACKUP_PROJECT="argo-svc-dev-4"
+LAB_PROJECT="workload-project"
+BACKUP_PROJECT="backup-project"
 REGION="australia-southeast1"
 
 echo "=== Importing GCBDR Core Resources ==="

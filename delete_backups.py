@@ -3,7 +3,7 @@ import json
 import concurrent.futures
 import sys
 
-PROJECT = "argo-svc-dev-4"
+PROJECT = "backup-project"
 LOCATION = "australia-southeast1"
 VAULT = "bv-australia-southeast1"
 

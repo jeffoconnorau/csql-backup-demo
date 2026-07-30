@@ -14,8 +14,8 @@ def run_command(args):
 
 def main():
     try:
-        lab_project = "argo-svc-dev-3"
-        backup_project = "argo-svc-dev-4"
+        lab_project = "workload-project"
+        backup_project = "backup-project"
         vault_region = "australia-southeast2"
         vault_id = "bv-australia-southeast2"
         mssql_name = "argo-demo-mssql-1"

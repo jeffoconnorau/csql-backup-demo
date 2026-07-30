@@ -17,19 +17,19 @@ The entire infrastructure and all backup storage locations are deployed **exclus
 ```mermaid
 graph LR
     subgraph australia-southeast1 [Sydney Region - australia-southeast1]
-        subgraph argo-svc-dev-3 [Workload Project: argo-svc-dev-3]
+        subgraph workload-project [Workload Project: workload-project]
             SQL[Cloud SQL: argo-demo-mssql-1]
             VPC[VPC: vpc-demo-anz]
             Subnet[Subnet: australia-southeast1]
             SQL --> Subnet
         end
-        subgraph argo-svc-dev-4 [Backup Project: argo-svc-dev-4]
+        subgraph backup-project [Backup Project: backup-project]
             VaultSydney[(Backup Vault: bv-australia-southeast1)]
         end
     end
 
     classDef sydney fill:#e3f2fd,stroke:#0d47a1,stroke-width:1px;
-    class australia-southeast1,argo-svc-dev-3,argo-svc-dev-4 sydney;
+    class australia-southeast1,workload-project,backup-project sydney;
 ```
 
 ---
@@ -38,9 +38,9 @@ graph LR
 
 The deployment splits workloads and backup management into two separate Google Cloud projects to enforce a strict boundary for security control:
 
-1.  **Workload Project (`argo-svc-dev-3`)**
+1.  **Workload Project (`workload-project`)**
     *   Houses the active database instance and local networking.
-2.  **Backup Project (`argo-svc-dev-4`)**
+2.  **Backup Project (`backup-project`)**
     *   Houses the Backup Vault (storage destination).
 
 ---
@@ -83,7 +83,7 @@ This plan is configured for non-production databases but is currently not applie
 *   **Daily Backup Rule (`daily`)**: Daily backups retained for **7 days**.
 ### 3.4. Alerting & Monitoring
 
-Cloud Monitoring alerting policies are defined in the backup project (`argo-svc-dev-4`):
+Cloud Monitoring alerting policies are defined in the backup project (`backup-project`):
 
 1.  **Backup Failure Alert**: Triggers a notification if any audit log from `backupdr.googleapis.com` containing the method `"Backup"` is recorded with a severity of `ERROR` or higher.
 2.  **Restore Event Alert**: Triggers a notification for any restore activity (both success and failure) from `backupdr.googleapis.com` containing the method `"Restore"`.
