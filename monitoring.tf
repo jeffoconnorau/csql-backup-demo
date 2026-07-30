@@ -8,7 +8,7 @@ resource "google_monitoring_notification_channel" "email" {
   display_name = "GCBDR Operations Email Alerts"
   type         = "email"
   labels = {
-    email_address = "jeff@glabco.com"
+    email_address = "email@email.com"
   }
 }
 

@@ -87,7 +87,7 @@ Cloud Monitoring alerting policies are defined in the backup project (`argo-svc-
 
 1.  **Backup Failure Alert**: Triggers a notification if any audit log from `backupdr.googleapis.com` containing the method `"Backup"` is recorded with a severity of `ERROR` or higher.
 2.  **Restore Event Alert**: Triggers a notification for any restore activity (both success and failure) from `backupdr.googleapis.com` containing the method `"Restore"`.
-3.  **Notification Channel**: Emails alerts to `jeff@glabco.com`.
+3.  **Notification Channel**: Emails alerts to `email@email.com`.
 
 ---
 
