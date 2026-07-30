@@ -1,0 +1,14 @@
+# Terraform files
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.*
+
+# Dynamic Dev-Test variables and reports
+dev-test/dev_backups.tfvars
+dev-test/dev_backups.json
+dev-test/dev_report_*.html
+dev-test/dev_test_report.html
+
+# OS files
+.DS_Store
