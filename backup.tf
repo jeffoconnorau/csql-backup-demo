@@ -7,6 +7,8 @@ resource "google_backup_dr_backup_vault" "vault_sydney" {
   backup_vault_id                            = "bv-australia-southeast1"
   description                                = "Sydney based backup vault"
   backup_minimum_enforced_retention_duration = "86400s" # 1 day
+  ignore_inactive_datasources                = true
+  force_delete                               = true
 }
 
 # ------------------------------------------------------------------------------
