@@ -59,3 +59,15 @@ resource "google_monitoring_alert_policy" "restore_event_alert" {
     }
   }
 }
+
+# ------------------------------------------------------------------------------
+# Log Analytics Configuration for Default Log Bucket
+# ------------------------------------------------------------------------------
+
+resource "google_logging_project_bucket_config" "default_log_bucket" {
+  provider         = google.backup
+  project          = var.backup_project_id
+  location         = "global"
+  bucket_id        = "_Default"
+  enable_analytics = true
+}
