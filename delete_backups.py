@@ -2,13 +2,17 @@ import subprocess
 import json
 import concurrent.futures
 import sys
+import argparse
+import os
 
 PROJECT = "backup-project"
 LOCATION = "australia-southeast1"
 VAULT = "bv-australia-southeast1"
 
 def run_command(cmd):
-    result = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    env = os.environ.copy()
+    env["CLOUDSDK_CORE_DISABLE_PROMPTS"] = "1"
+    result = subprocess.run(cmd, env=env, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     if result.returncode != 0:
         raise Exception(f"Command failed: {' '.join(cmd)}\nError: {result.stderr}")
     return result.stdout
@@ -51,6 +55,28 @@ def delete_backup(ds_id, backup_id):
         return False, ds_id, backup_id, str(e)
 
 def main():
+    parser = argparse.ArgumentParser(description="Delete backups in parallel from a GCBDR vault.")
+    parser.add_argument("--project", default="backup-project", help="GCP Project ID (default: backup-project)")
+    parser.add_argument("--location", default="australia-southeast1", help="Backup Vault Location (default: australia-southeast1)")
+    parser.add_argument("--vault", default="bv-australia-southeast1", help="Backup Vault ID (default: bv-australia-southeast1)")
+    
+    args = parser.parse_args()
+    
+    global PROJECT, LOCATION, VAULT
+    PROJECT = args.project
+    LOCATION = args.location
+    VAULT = args.vault
+    
+    if PROJECT == "backup-project":
+        print("Error: Default placeholder 'backup-project' ID is being used.")
+        print("Please run the script again and specify your actual GCP Backup Project ID, for example:")
+        print("  python3 delete_backups.py --project=argo-svc-dev-4")
+        sys.exit(1)
+        
+    print(f"Using Project: {PROJECT}")
+    print(f"Using Location: {LOCATION}")
+    print(f"Using Vault: {VAULT}")
+    
     try:
         data_sources = get_data_sources()
         print(f"Found {len(data_sources)} data sources.")
